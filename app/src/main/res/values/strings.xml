@@ -3,4 +3,5 @@
     <string name="add_new_monitored_train">Add</string>
     <string name="list_of_monitored_trains">List of monitored trains:</string>
     <string name="id">ID:</string>
+    <string name="delete_monitored_train">Delete monitored train</string>
 </resources>
