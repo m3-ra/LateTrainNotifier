@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.Button
 import com.jcros.latetrainnotifier.commands.ICommand
-import com.jcros.latetrainnotifier.models.MonitoredTrain
+import com.jcros.latetrainnotifier.database.MonitoredTrainsData
 
 @BindingAdapter("command")
 fun bindButtonClick(button: Button, command: ICommand) {
@@ -14,7 +14,7 @@ fun bindButtonClick(button: Button, command: ICommand) {
 }
 
 @BindingAdapter("collection")
-fun bindCollectionToRecyclerView(view: RecyclerView, collection: List<MonitoredTrain>) {
+fun bindCollectionToRecyclerView(view: RecyclerView, collection: List<MonitoredTrainsData>) {
 
     if (view.layoutManager == null)
         view.layoutManager = LinearLayoutManager(view.context)

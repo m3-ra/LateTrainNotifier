@@ -3,10 +3,10 @@ package com.jcros.latetrainnotifier.viewHelpers
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.jcros.latetrainnotifier.database.MonitoredTrainsData
 import com.jcros.latetrainnotifier.databinding.ItemTrainBinding
-import com.jcros.latetrainnotifier.models.MonitoredTrain
 
-class TrainListAdapter(var trains: List<MonitoredTrain>) : RecyclerView.Adapter<TrainListViewHolder>() {
+class TrainListAdapter(var trains: List<MonitoredTrainsData>) : RecyclerView.Adapter<TrainListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainListViewHolder {
 

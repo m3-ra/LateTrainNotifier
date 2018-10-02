@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.jcros.latetrainnotifier.R
+import com.jcros.latetrainnotifier.database.MonitoredTrainsDatabase
 import com.jcros.latetrainnotifier.databinding.ActivityMainBinding
 import com.jcros.latetrainnotifier.viewModels.MainViewModel
 
@@ -15,6 +16,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = MainViewModel(this)
+
+        val db = MonitoredTrainsDatabase.getInstance(this)
+
+        if (db != null)
+            binding.vm = MainViewModel(this, db)
     }
 }
