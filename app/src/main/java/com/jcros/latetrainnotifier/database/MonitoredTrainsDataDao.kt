@@ -8,12 +8,15 @@ import android.arch.persistence.room.Query
 @Dao
 interface MonitoredTrainsDataDao {
 
-    @Query("SELECT * from monitoredTrainsData")
-    fun getAll(): List<MonitoredTrainsData>
+    @Query("SELECT * from monitoredTrain")
+    fun getAll(): List<MonitoredTrain>
 
     @Insert(onConflict = REPLACE)
-    fun insert(monitoredTrainsData: MonitoredTrainsData)
+    fun insert(monitoredTrain: MonitoredTrain)
 
-    @Query("DELETE from monitoredTrainsData")
+    @Query("DELETE from monitoredTrain where id = :id")
+    fun deleteById(id : Int)
+
+    @Query("DELETE from monitoredTrain")
     fun deleteAll()
 }

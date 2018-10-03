@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 
-@Database(entities = [MonitoredTrainsData::class], version = 1)
+@Database(entities = [MonitoredTrain::class], version = 1)
 abstract class MonitoredTrainsDatabase : RoomDatabase() {
 
     abstract fun monitoredTrainsDataDao(): MonitoredTrainsDataDao
@@ -16,8 +16,8 @@ abstract class MonitoredTrainsDatabase : RoomDatabase() {
         fun getInstance(context: Context): MonitoredTrainsDatabase? {
             if (INSTANCE == null) {
                 synchronized(MonitoredTrainsDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            MonitoredTrainsDatabase::class.java, "monitoredTrains.db")
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, MonitoredTrainsDatabase::class.java, "monitoredTrains.db")
+                            .allowMainThreadQueries() // TODO questionable but will do for now
                             .build()
                 }
             }

@@ -19,7 +19,9 @@ class MainActivity : AppCompatActivity() {
 
         val db = MonitoredTrainsDatabase.getInstance(this)
 
-        if (db != null)
-            binding.vm = MainViewModel(this, db)
+        when {
+            db != null -> binding.vm = MainViewModel(this, db)
+            else -> throw RuntimeException("Could not start app, database error")
+        }
     }
 }
