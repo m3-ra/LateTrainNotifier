@@ -6,6 +6,7 @@ import android.content.Context
 import android.databinding.BaseObservable
 import com.jcros.latetrainnotifier.commands.ICommand
 import com.jcros.latetrainnotifier.commands.RelayCommand
+import com.jcros.latetrainnotifier.commands.RelayCommandAtPosition
 import com.jcros.latetrainnotifier.database.MonitoredTrain
 import com.jcros.latetrainnotifier.database.MonitoredTrainsDatabase
 import com.jcros.latetrainnotifier.notifications.NotifierManager
@@ -14,13 +15,13 @@ class MainViewModel(@field:Transient val context: Context, val db: MonitoredTrai
 
     val notificationManager: NotifierManager
     val addNewMonitoredTrainCommand: ICommand
-    val deleteMonitoredTrain: ICommand
+    val deleteMonitoredTrain: RelayCommandAtPosition
     var monitoredTrains = mutableListOf<MonitoredTrain>()
     var newId: String = ""
 
     init {
         addNewMonitoredTrainCommand = RelayCommand { addNewMonitoredTrain() }
-        deleteMonitoredTrain = RelayCommand { deleteTrain() }
+        deleteMonitoredTrain = RelayCommandAtPosition { pos: Int -> deleteTrain(pos) }
 
         notificationManager = NotifierManager(context.getSystemService(Context.ALARM_SERVICE) as AlarmManager,
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager, context)
@@ -47,12 +48,9 @@ class MainViewModel(@field:Transient val context: Context, val db: MonitoredTrai
         notifyChange()
     }
 
-    private fun deleteTrain() {
-    }
+    private fun deleteTrain(position: Int) {
 
-    private fun deleteTrain(id: Int) {
-
-        db.monitoredTrainsDataDao().deleteById(id)
+        db.monitoredTrainsDataDao().deleteById(monitoredTrains[position].id ?: return)
         reloadDatabase()
     }
 }
